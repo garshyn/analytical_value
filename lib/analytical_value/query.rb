@@ -9,6 +9,14 @@ module AnalyticalValue
       @options[:range]
     end
 
+    def from
+      date - range
+    end
+
+    def to
+      date - 1
+    end
+
     def value
       @value ||= @options[:value] || query
     end
