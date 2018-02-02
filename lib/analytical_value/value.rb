@@ -37,6 +37,14 @@ module AnalyticalValue
       value - prev_value
     end
 
+    def increased?
+      difference_signed > 0
+    end
+
+    def decreased?
+      difference_signed < 0
+    end
+    
     def percentage
       if prev_value.zero?
         return 0 if value.zero?

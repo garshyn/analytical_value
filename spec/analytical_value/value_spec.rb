@@ -11,6 +11,7 @@ describe AnalyticalValue::Value do
     let(:options) { { value: 1, prev: 4 } }
     it { expect(subject.value).to eq 1 }
     it { expect(subject.prev_value).to eq 4 }
+    it { is_expected.to be_decreased }
     it { expect(subject.difference).to eq 3 }
     it { expect(subject.percentage).to eq 75 }
     it { expect(subject).not_to be_zero }
@@ -28,6 +29,7 @@ describe AnalyticalValue::Value do
   context "before as array" do
     let(:options) { { value: 5, before: [2, 1] } }
     it { expect(subject.value).to eq 5 }
+    it { is_expected.to be_increased }
     it { expect(subject.prev_value).to eq 2 }
     it { expect(subject.prev.value).to eq 2 }
     it { expect(subject.prev.prev_value).to eq 1 }
