@@ -7,7 +7,7 @@ Gem::Specification.new do |spec|
   spec.name          = "analytical_value"
   spec.version       = AnalyticalValue::VERSION
   spec.authors       = ["Andrew Garshyn"]
-  spec.email         = ["andrew@garshyn.com"]
+  spec.email         = ["andrew@ethicontrol.com"]
 
   spec.summary       = "Value object pattern"
   spec.description   = "Helps to calculate reports with comparison to previous period of time"

@@ -21,6 +21,10 @@ module AnalyticalValue
       @value ||= @options[:value] || query
     end
 
+    def call
+      @value = query
+    end
+
     private
     def query
       0
