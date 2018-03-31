@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 describe AnalyticalValue::Value do
   let(:subject) { described_class.new(options) }
   let(:options) { {} }
@@ -8,7 +6,7 @@ describe AnalyticalValue::Value do
   it { is_expected.to be_zero }
 
   context "provided values" do
-    let(:options) { { value: 1, prev: 4 } }
+    let(:options) { { value: 1, prev_value: 4 } }
     it { expect(subject.value).to eq 1 }
     it { expect(subject.prev_value).to eq 4 }
     it { is_expected.to be_decreased }
@@ -21,18 +19,18 @@ describe AnalyticalValue::Value do
     let(:options) { { value: 1 } }
     it { expect(subject.value).to eq 1 }
     it { expect(subject.prev_value).to eq 0 }
+    it { is_expected.to be_increased }
     it { expect(subject.difference).to eq 1 }
     it { expect(subject.percentage).to eq 100 }
     it { expect(subject).not_to be_zero }
+    context "connecting prev value" do
+      before :each do
+        subject.prev = described_class.new(value: 2)
+      end
+      it { expect(subject.prev_value).to eq 2 }
+      it { is_expected.to be_decreased }
+      it { expect(subject.difference).to eq 1 }
+      it { expect(subject.percentage).to eq 50 }
+    end
   end
-
-  context "before as array" do
-    let(:options) { { value: 5, before: [2, 1] } }
-    it { expect(subject.value).to eq 5 }
-    it { is_expected.to be_increased }
-    it { expect(subject.prev_value).to eq 2 }
-    it { expect(subject.prev.value).to eq 2 }
-    it { expect(subject.prev.prev_value).to eq 1 }
-  end
-
 end

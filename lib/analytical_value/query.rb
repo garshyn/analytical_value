@@ -1,6 +1,5 @@
 module AnalyticalValue
   class Query < Value
-
     def date
       @options[:date]
     end
@@ -18,7 +17,11 @@ module AnalyticalValue
     end
 
     def value
-      @value ||= @options[:value] || query
+      @value ||= query
+    end
+
+    def prev
+      @options[:prev] ||= self.class.new @options.merge(date: date - range)
     end
 
     def call
@@ -26,13 +29,9 @@ module AnalyticalValue
     end
 
     private
+
     def query
       0
-    end
-    def options_for_before_object(index)
-      super.tap do |options|
-        options[:date] = date - range
-      end
     end
   end
 end

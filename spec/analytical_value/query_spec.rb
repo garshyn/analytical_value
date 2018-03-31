@@ -1,28 +1,3 @@
-require 'spec_helper'
-
-class AnalyticalValue::SampleQuery < AnalyticalValue::Query
-  def query
-    {
-      Time.current.end_of_week => 5,
-      7.days.ago.end_of_week => 2,
-      14.days.ago.end_of_week => 1
-    }[date]
-  end
-end
-
-class ParamQuery < AnalyticalValue::Query
-  def query
-    {
-      Time.current.end_of_week => param[:param_value] ** 2 + 10,
-      7.days.ago.end_of_week => param[:param_value] ** 2 + 5,
-      14.days.ago.end_of_week => param[:param_value] ** 2 + 1
-    }[date]
-  end
-  def param
-    @options[:param]
-  end
-end
-
 describe AnalyticalValue::Query do
   let(:date) { Time.current.end_of_week }
   let(:range) { 1.week }
@@ -53,13 +28,13 @@ describe AnalyticalValue::Query do
         { id: 4, param_value: 6 }
       ]
       queries = []
-      paramObjects.each do |obj|
-        query = ParamQuery.new(options.merge(param: obj))
-        # puts "#{obj[:id]}: #{query.prev.prev_value} -> #{query.prev.value} -> #{query.value}: #{query.percentage}%"
+      paramObjects.each do |params|
+        query = ParamQuery.new(options.merge(params))
+        # puts "#{params[:id]}: #{query.prev.prev_value} -> #{query.prev.value} -> #{query.value}: #{query.percentage}%"
         queries << query
       end
-      expect(queries.last.call).to eq 46
-      expect(queries.last.prev.value).to eq 41
+      expect(queries.last.call).to eq 24
+      expect(queries.last.prev.value).to eq 18
     end
   end
 end

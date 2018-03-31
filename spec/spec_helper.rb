@@ -1,3 +1,5 @@
 require 'rspec'
 require 'simplecov'
 require 'analytical_value'
+require_relative 'analytical_value/support/sample_query'
+require_relative 'analytical_value/support/param_query'
