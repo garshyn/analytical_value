@@ -19,6 +19,10 @@ module AnalyticalValue
       value - prev
     end
 
+    def ==(other)
+      value == other.value && prev == other.prev
+    end
+
     alias increased? positive?
     alias decreased? negative?
     alias stable? zero?

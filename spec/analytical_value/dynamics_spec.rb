@@ -54,5 +54,28 @@ module AnalyticalValue
         expect(dynamics.percentage).to eq 100
       end
     end
+
+    describe 'equality' do
+      it 'supports comparing objects' do
+        dynamics_1 = described_class.new 1, 2
+        dynamics_2 = described_class.new 1, 2
+
+        expect(dynamics_1).to eq dynamics_2
+      end
+
+      it 'is not equal' do
+        dynamics_1 = described_class.new 1, 2
+        dynamics_2 = described_class.new 1, 3
+
+        expect(dynamics_1).not_to eq dynamics_2
+      end
+
+      it 'is not equal' do
+        dynamics_1 = described_class.new 0, 2
+        dynamics_2 = described_class.new 1, 2
+
+        expect(dynamics_1).not_to eq dynamics_2
+      end
+    end
   end
 end
