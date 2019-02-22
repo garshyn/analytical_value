@@ -1,8 +1,8 @@
 module AnalyticalValue
   class DynamicsHash
     def initialize(prev_hash, current_hash, keys: nil)
-      @prev_hash = prev_hash
-      @current_hash = current_hash
+      @prev_hash = prev_hash || {}
+      @current_hash = current_hash || {}
       @selected_keys = keys || default_keys
     end
 
