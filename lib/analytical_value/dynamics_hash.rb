@@ -1,7 +1,5 @@
 module AnalyticalValue
   class DynamicsHash
-    delegate :[], to: :result
-
     def initialize(prev_hash, current_hash, keys: nil)
       @prev_hash = prev_hash
       @current_hash = current_hash
@@ -12,6 +10,10 @@ module AnalyticalValue
       @_result ||= selected_keys.each_with_object({}) do |key, hash|
         hash[key] = Dynamics.new to_hash[key].first, to_hash[key].last
       end
+    end
+
+    def [](key)
+      result[key] || empty_dynamics
     end
 
     def to_hash
@@ -29,6 +31,10 @@ module AnalyticalValue
 
     def default_keys
       @_default_keys ||= prev_hash.merge(current_hash).keys
+    end
+
+    def empty_dynamics
+      Dynamics.new 0, 0
     end
   end
 end

@@ -21,6 +21,45 @@ module AnalyticalValue
         expect(dynamics.difference).to eq 0
         expect(dynamics).to be_stable
       end
+
+      it 'is empty' do
+        dynamics = described_class.new 0, 0
+
+        expect(dynamics).to be_empty
+      end
+
+      it 'handles nil prev' do
+        dynamics = described_class.new nil, 1
+
+        expect(dynamics.value).to eq 1
+        expect(dynamics.prev).to be_nil
+        expect(dynamics).to be_undefined
+        expect(dynamics).to be_positive
+        expect(dynamics.percentage).to be_nil
+        expect(dynamics.difference).to eq 1
+      end
+
+      it 'handles nil current' do
+        dynamics = described_class.new 1, nil
+
+        expect(dynamics.value).to be_nil
+        expect(dynamics.prev).to eq 1
+        expect(dynamics).to be_undefined
+        expect(dynamics).to be_negative
+        expect(dynamics.percentage).to be_nil
+        expect(dynamics.difference).to eq 1
+      end
+
+      it 'handles both nil values' do
+        dynamics = described_class.new nil, nil
+
+        expect(dynamics.value).to be_nil
+        expect(dynamics.prev).to be_nil
+        expect(dynamics).to be_undefined
+        expect(dynamics).to be_stable
+        expect(dynamics.percentage).to be_nil
+        expect(dynamics.difference).to eq 0
+      end
     end
 
     describe '#percentage' do

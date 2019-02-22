@@ -50,8 +50,8 @@ module AnalyticalValue
       dynamics_2 = Dynamics.new(0, 0)
 
       expect(hash[1]).to eq dynamics_1
-      expect(hash[2]).to be_nil
-      expect(hash[3]).to be_nil
+      expect(hash[2]).to be_empty
+      expect(hash[3]).to be_empty
       expect(hash[4]).to eq dynamics_2
       expect(hash.result).to eq(
         1 => dynamics_1,

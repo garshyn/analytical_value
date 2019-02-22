@@ -9,18 +9,27 @@ module AnalyticalValue
     end
 
     def percentage
-      return 0 if value.zero? && prev.zero?
+      return nil if undefined?
+      return 0 if empty?
       return 100 if prev.zero?
 
       (difference * 100.0 / prev).round
     end
 
     def difference_signed
-      value - prev
+      value.to_i - prev.to_i
     end
 
     def ==(other)
       value == other.value && prev == other.prev
+    end
+
+    def undefined?
+      value.nil? || prev.nil?
+    end
+
+    def empty?
+      value.zero? && prev.zero?
     end
 
     alias increased? positive?
