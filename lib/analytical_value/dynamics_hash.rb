@@ -5,8 +5,7 @@ module AnalyticalValue
     def initialize(prev_hash, current_hash, keys: nil)
       @prev_hash = prev_hash
       @current_hash = current_hash
-      @selected_keys = default_keys
-      @selected_keys = default_keys & keys if keys.present?
+      @selected_keys = keys || default_keys
     end
 
     def result
