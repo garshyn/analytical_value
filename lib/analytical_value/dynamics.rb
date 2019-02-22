@@ -32,6 +32,16 @@ module AnalyticalValue
       value.zero? && prev.zero?
     end
 
+    def to_s
+      return 'undefined' if undefined?
+      return 'empty' if empty?
+      return 'up' if positive?
+      return 'down' if negative?
+      return 'stable' if stable?
+
+      ''
+    end
+
     alias increased? positive?
     alias decreased? negative?
     alias stable? zero?

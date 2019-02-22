@@ -116,5 +116,31 @@ module AnalyticalValue
         expect(dynamics_1).not_to eq dynamics_2
       end
     end
+
+    describe '#to_s' do
+      it 'is up' do
+        dynamics = described_class.new 1, 2
+
+        expect(dynamics.to_s).to eq 'up'
+      end
+
+      it 'is down' do
+        dynamics = described_class.new 2, 1
+
+        expect(dynamics.to_s).to eq 'down'
+      end
+
+      it 'is stable' do
+        dynamics = described_class.new 1, 1
+
+        expect(dynamics.to_s).to eq 'stable'
+      end
+
+      it 'is undefined' do
+        dynamics = described_class.new nil, 1
+
+        expect(dynamics.to_s).to eq 'undefined'
+      end
+    end
   end
 end
